@@ -28,33 +28,63 @@
 
 
                 <div class="card-body">
-                <div class="row pt-6">
+                <div class="container">
+    @if(isset($message))
+    <h1>{{$message}}</h1>
+    @endif
+    @if(isset($post))
 
-@foreach($posts as $post)
+    <h2>Résultat des annonces</h2>
 
-<div class="col-4 pb-5">
-<div class="card">
-            <div class="card-header"><a href="/post/{{$post->id}}">{{$post->item->titre}}</a></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
 
-            <div class="card-body">
-<a href="/post/{{$post->id}}"><img src="/storage/{{ $post->item->image }}" class="w-100" alt="photo"></a>
-<h6><a href="/profile/{{$post->item->user->id}}">{{$post->item->user->name.' '.$post->item->user->prenom}}</a></h6>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($post as $post)
+            <tr>
+                <td>{{$post->titre}}</td>
+                <td>{{$post->description}}</td>
 
-<h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
-<h6>{{$post->item->created_at}}</h6>
-<p>{{$post->item->description}}</p>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endif
+    <hr><hr><hr>
+    @if(isset($categorie))
+
+<h2>Résulats des catégories</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom de catégorie</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($categorie as $post)
+        <tr>
+            <td><a href="/categorie/{{$post->id}}">{{$post->nom}}</a></td>
+
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
 </div>
-        </div>
-    </div>
 
-@endforeach
 
-</div>
 
                 </div>
             </div>
         </div>
-        {{ $posts->links() }}
+
     </div>
 </div>
 @endsection

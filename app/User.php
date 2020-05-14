@@ -55,4 +55,19 @@ class User extends Authenticatable
     {
       return $this->hasOne(Profile::class);
     }
+    public function item()
+    {
+    return $this->hasMany(Item::class)->orderBy('created_at','DESC');
+
+    }
+    public function post()
+    {
+    return $this->hasMany(Post::class)->orderBy('created_at','DESC');
+
+    }
+    public function comments()
+    {
+    return $this->hasMany(Comment::class);
+
+    }
 }

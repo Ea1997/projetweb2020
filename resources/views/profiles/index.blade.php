@@ -48,5 +48,27 @@
 
 
       </div>
+      <div class="row pt-5">
+
+    @foreach($user->post as $post)
+
+    <div class="col-4 pb-5">
+    <div class="card">
+                <div class="card-header">{{$post->item->titre}}</div>
+
+                <div class="card-body">
+    <a href="/post/{{$post->id}}"><img src="/storage/{{ $post->item->image }}" class="w-100" alt="photo"></a>
+    <h6><a href="/profile/{{$post->item->user->id}}">{{$post->item->user->name.' '.$post->item->user->prenom}}</a></h6>
+    <h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
+<p>{{$post->item->description}}</p>
+</div>
+            </div>
+        </div>
+
+    @endforeach
+    </div>
+
+
+  </div>
   </div>
 @endsection

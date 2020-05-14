@@ -23,49 +23,37 @@
     </form>
   </div>
 </nav>
-<div class="col-md-12">
+        <div class="col-md-12">
             <div class="card">
 
-
+@if(isset($message))
+<div class="card-header">{{$message}}</div>
+@endif
                 <div class="card-body">
                 <div class="row pt-6">
 
-@foreach(Auth()->user()->item as $post)
-
-
+@foreach($posts as $post)
 
 <div class="col-4 pb-5">
 <div class="card">
-            <div class="card-header">{{$post->titre}}</div>
+            <div class="card-header"><a href="/post/{{$post->id}}">{{$post->item->titre}}</a></div>
 
             <div class="card-body">
-<img src="/storage/{{ $post->image }}" class="w-100" alt="photo">
-
-Catégorie :<h6>{{$post->categorie->nom}}</h6>
-Déscription :
+<a href="/post/{{$post->id}}"><img src="/storage/{{ $post->item->image }}" class="w-100" alt="photo"></a>
+<h6><a href="/profile/{{$post->user->id}}">{{$post->user->name.' '.$post->user->prenom}}</a></h6>
+<h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
+<h6>{{$post->created_at}}</h6>
 <p>{{$post->description}}</p>
-<form action="/item/create" method="POST">
-@csrf
-<input type="hidden" name="id" value="{{$post->id}}">
-<button type="submit" class="btn btn-primary">Utiliser cet objet</button>
-</form>
 </div>
         </div>
     </div>
 
 @endforeach
-
 </div>
-<a href="/item/create"><button type="button" class="btn btn-outline-primary btn-lg">Ajouter un nouveau objet</button><a>
                 </div>
             </div>
         </div>
-
+        {{ $posts->links() }}
     </div>
 </div>
-
-
-
-
-
 @endsection

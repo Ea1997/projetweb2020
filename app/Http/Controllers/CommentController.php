@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
-use App\Categorie;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'delete']]);
-    }
     public function index()
     {
         //
@@ -30,11 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-
-        $data=Categorie::all();
-
-            return view('posts.create',compact('data'));
-
+        //
     }
 
     /**
@@ -43,32 +34,42 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Post $post_id)
+    {
+        $data=request()->validate(  [
+            'comment'=>'required',
+
+          ]);
+
+
+        $comment=new Comment();
+        $comment->user_id=auth()->user()->id;
+        $comment->post_id=$post_id->id;
+        $comment->comment=$request->comment;
+
+        $comment->save();
+        return redirect()->route('post.show',$post_id->id);
+        }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Comment  $comment
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Comment $comment)
     {
         //
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-
-
-      return view('posts.show',compact('post'));
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -77,10 +78,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -88,12 +89,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Comment $comment)
     {
-        $post->delete();
-         return redirect('/profile/'.auth()->user()->id);
+        //
     }
 }
