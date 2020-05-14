@@ -9,7 +9,7 @@
   <div class="col-6">
     <div class="d-flex align-items-center">
       <div class="pr-2">
-        <img src="{{$post->user->profile->profileImage()}}" class="w-50 rounded-circle mr-0"  alt="">
+        <img src="{{$post->user->profile->profileImage()}}" style="width:50px;" class=" rounded-circle mr-0"  alt="">
       </div>
       <div class="font-weight-bold d-flex align-items-center">
       <a href="/profile/{{$post->user->id}}" class="mr-3 ml-0"><span class="text-dark">{{$post->user->name.' '.$post->user->prenom}}</span></a>
@@ -29,7 +29,7 @@
     </div>
 
     <hr>
-      <p><strong><a href="/profile/{{$post->user->id}}"><span class="text-dark">Titre:{{$post->item->titre}}</span></a><br>Description:</strong>{{$post->item->description}}<br><strong>Prix</strong>{{$post->prix}} DH / Jour</p>
+      <p><strong><span class="text-dark">Titre:</strong>{{$post->item->titre}}</span></a><br><strong>Description:</strong>{{$post->item->description}}<br><strong>Prix</strong>{{$post->prix}} DH / Jour</p>
 <hr>
 Catégorie:
 <h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
@@ -68,7 +68,7 @@ Catégorie:
 <td><button class="btn btn-primary mt-2">Commenter</button></td>
 <td>
 @if(Auth()->user()->id!=$post->user->id)
-<a class="btn btn-primary mt-2" href="">Louer cet objet</a>
+<a class="btn btn-primary mt-2" href="/order/{{$post->id}}">Louer cet objet</a>
 @endif
 </td>
 </tr>

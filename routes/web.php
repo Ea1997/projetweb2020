@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/order/commande', 'OrderController@reshow')->name('order.show');
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
@@ -31,3 +32,9 @@ Route::get('/categorie/{categorie}', 'CategorieController@show')->name('categori
 Route::post('/search', 'HomeController@search');
 Route::delete('/post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::post('/comments/{post_id}','CommentController@store')->name('comments.store');
+Route::get('/order/{post}', 'OrderController@create')->name('order.create');
+Route::post('/order', 'OrderController@store')->name('order.store');
+Route::get('/order', 'OrderController@show')->name('order.show');
+Route::get('/order/{id}/accepted', 'OrderController@update')->name('order.update');
+Route::get('/order/{id}/payed', 'OrderController@reupdate');
+

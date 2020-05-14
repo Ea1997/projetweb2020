@@ -24,6 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="storage/logo/logo.png" style="width:150px;" class=" rounded-circle mr-0"  alt="">
                 <strong>SMSEXPRESS</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -60,6 +61,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a href="/profile/{{Auth::user()->id}}" class="dropdown-item">Visiter ton profile</a>
+                                <a href="/order" class="dropdown-item">vos commandes</a>
+                                <a href="/order/commande" class="dropdown-item">Vos objets commandées</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

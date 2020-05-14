@@ -39,23 +39,35 @@
     <table class="table table-striped">
         <thead>
             <tr>
+            <th></th>
                 <th>Titre</th>
                 <th>Description</th>
+                <th>prix</th>
+                <th>date d'annonce</th>
+                <th>date d'annonce</th>
+
 
             </tr>
         </thead>
         <tbody>
             @foreach($post as $post)
+            @foreach($post->post as $posts)
             <tr>
-                <td>{{$post->titre}}</td>
-                <td>{{$post->description}}</td>
+
+            <td><a href="/post/{{$posts->id}}"><img style="width:100px;" src="/storage/{{$posts->item->image}}" alt=""></a></td>
+                <td><a href="/post/{{$posts->id}}">{{$posts->item->titre}}</a></td>
+                <td>{{$posts->item->description}}</td>
+                <td>{{$posts->prix}} MAD/jour</td>
+                <td><a href="/profile/{{$posts->user->id}}">{{$posts->user->name.' '.$posts->user->prenom}}</a></td>
+                <td>{{$posts->created_at}}</td>
 
             </tr>
+            @endforeach
             @endforeach
         </tbody>
     </table>
     @endif
-    <hr><hr><hr>
+    <hr>
     @if(isset($categorie))
 
 <h2>Résulats des catégories</h2>

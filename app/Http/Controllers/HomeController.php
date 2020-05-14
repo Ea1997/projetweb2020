@@ -41,7 +41,7 @@ class HomeController extends Controller
         if( count($post) > 0 || count($categorie) > 0)
             return view('search.result',compact('data','post','categorie'));
         else{
-            $message="Aucune resultat est trouvé";
+            $message="Aucun resultat est trouvé";
             return view ('search.result',compact('data','message'));
         }
     }
