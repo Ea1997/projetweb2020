@@ -17,9 +17,12 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
-            $table->string('duree');
+            $table->date('date_debut_location');
+            $table->date('date_fin_location');
             $table->boolean('accepted');
-            $table->boolean('payed');
+            $table->boolean('refused');
+            $table->boolean('commented_by_user');
+            $table->boolean('commented_by_partenaire');
             $table->timestamps();
 
             $table->index('user_id');

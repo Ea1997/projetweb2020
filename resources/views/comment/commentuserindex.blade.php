@@ -28,7 +28,7 @@
 
 <div class="d-block">
 <div class="d-block">
-<a href="/profile/{{$user->id}}/comments">Consulter mes commentaires</a>
+<a href="/profile/{{$user->id}}">Consulter mon profile</a>
 </div>
 @if(Auth::check() && Auth::user()->id==$user->id)
 
@@ -53,18 +53,20 @@
       </div>
       <div class="row pt-5">
 
-    @foreach($user->post as $post)
+    @foreach($user->profile->commentuser as $comment)
 
     <div class="col-4 pb-5">
     <div class="card">
 
-                <div class="card-header">{{$post->item->titre}}</div>
-
+                @if($comment->avis==1)
+      <div class="card-header" style="background-color:#7FFF00">Commentaire par :{{$comment->user->name}}</div>
+      @else
+      <div class="card-header" style="background-color:#FF3232">Commentaire par :{{$comment->user->name}}</div>
+@endif
                 <div class="card-body">
-    <a href="/post/{{$post->id}}"><img src="/storage/{{ $post->item->image }}" class="w-100" alt="photo"></a>
-    <h6><a href="/profile/{{$post->item->user->id}}">{{$post->item->user->name.' '.$post->item->user->prenom}}</a></h6>
-    <h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
-<p>{{$post->item->description}}</p>
+
+
+<p>{{$comment->comment}}</p>
 </div>
             </div>
         </div>

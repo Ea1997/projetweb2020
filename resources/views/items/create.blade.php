@@ -101,6 +101,57 @@
                             </div>
                         </div>
 
+
+
+
+
+
+                        <div class="form-group row">
+                            <label for="date_dispo" class="col-md-4 col-form-label text-md-right">{{ __('Date debut de disponibilité') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="date_dispo" type="date" class="form-control @error('date_dispo') is-invalid @enderror" name="date_dispo" value="{{ old('date_dispo')}}" required autocomplete="date_dispo">
+
+                                @error('date_dispo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date_fin_dispo" class="col-md-4 col-form-label text-md-right">{{ __('Date fin de disponibilité') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="date_fin_dispo" type="date" class="form-control @error('date_fin_dispo') is-invalid @enderror" name="date_fin_dispo" value="{{ old('date_fin_dispo')}}" required autocomplete="date_fin_dispo">
+
+                                @error('date_fin_dispo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+
+<div class="col-md-6">
+    <input id="premium" type="checkbox" class="form-control @error('premium') is-invalid @enderror" name="premium" value="true"  autocomplete="premium">
+
+    @error('premium')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+</div>
+<label for="premium" class=" col-form-label text-md-left">{{ __('Premium') }}</label>
+</div>
+
+
+
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

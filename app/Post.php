@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'item_id','prix','user_id','categorie_id'
+        'item_id','prix','user_id','categorie_id','date_dispo','date_fin_dispo','premium'
     ];
     public function item()
     {
@@ -17,10 +17,7 @@ class Post extends Model
     {
     	return $this->belongsTo(User::class);
     }
-    public function comments()
-      {
-      	return $this->hasMany(Comment::class);
-      }
+
       public function order()
       {
       	return $this->hasMany(Order::class);

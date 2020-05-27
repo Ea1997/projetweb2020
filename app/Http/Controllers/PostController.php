@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\rating;
 use App\Post;
 use App\Categorie;
 use Illuminate\Http\Request;

@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class CommentUser extends Model
 {
-    public function item()
+    public function profile()
     {
-    	return $this->belongsTo(Item::class);
+    	return $this->belongsTo(Profile::class);
     }
     public function user()
     {

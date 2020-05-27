@@ -29,62 +29,63 @@
     </div>
 
     <hr>
-      <p><strong><span class="text-dark">Titre:</strong>{{$post->item->titre}}</span></a><br><strong>Description:</strong>{{$post->item->description}}<br><strong>Prix</strong>{{$post->prix}} DH / Jour</p>
+      <p><strong><span class="text-dark">Titre : </strong>{{$post->item->titre}}</span></a><br><strong>Description : </strong>{{$post->item->description}}<br><strong>Prix : </strong>{{$post->prix}} DH / Jour</p>
 <hr>
-Catégorie:
+Catégorie :
 <h6><a href="/categorie/{{$post->item->categorie->id}}">{{$post->item->categorie->nom}}</a></h6>
 <hr>
 @if (Auth::check())
-  <h5>Comments:</h5>
+<h4>Note : </h4>
+<?php
+$rates=$post->item->rating->avg('rate');
+$review=(object)['rate'=>$rates];
+
+for($i=0; $i<5; ++$i){
+
+    echo '<i class="fa fa-star',($review->rate<=$i?'-o':''),'" aria-hidden="true"></i>';
+}
+?><hr>
+  <h5>Commentaires : </h5>
      <div id="comment">
 
 
 
-     @foreach($post->comments as $comment)
-     <div class="d-block">
+     @foreach($post->item->comments as $comment)
+     <div class="d-flex">
      <a href="/profile/{{$comment->user->id}}"><strong>{{$comment->user->name}}</strong></a> :
-{{$comment->comment}}
+         @if($comment->avis == 1)
+     <p style="color:blue">{{$comment->comment}}</p>
+     @else
+    <p style="color:red">{{$comment->comment}}</p>
+     @endif
+
 
 </div>
   @endforeach
 
   </div>
-  <form  action="/comments/{{$post->id}}" enctype="multipart/form-data" method="post">
-  @csrf
 
 
 
-                <input  id="comment" type="text" class="form-control @error('comment') is-invalid @enderror"  value="{{ old('comment')}}" name="comment"  autocomplete="comment" >
-
-                @error('comment')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
 
 
-<table class="w-100">
-<tr>
-<td><button class="btn btn-primary mt-2">Commenter</button></td>
-<td>
 @if(Auth()->user()->id!=$post->user->id)
 <a class="btn btn-primary mt-2" href="/order/{{$post->id}}">Louer cet objet</a>
 @endif
-</td>
-</tr>
-</table>
 
 
-    </form>
+
 
 
 @else
 <h5>Merci de se connecter pour pouvoir consulter les commentaires</h5>
 <a href="/login"><button class="btn btn-primary">Se connecter</button></a>
-@endif
+@endif<hr>
+
   </div>
 
 </div>
+
 
 
 

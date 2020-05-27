@@ -30,8 +30,13 @@ class HomeController extends Controller
     {
         $posts=Post::latest()->paginate(9);
         $data=Categorie::all();
+
         return view('home',compact('data','posts'));
     }
+
+
+
+
     public function search(){
         $data=Categorie::all();
         $text = Request('Search');
@@ -45,4 +50,5 @@ class HomeController extends Controller
             return view ('search.result',compact('data','message'));
         }
     }
+
 }

@@ -54,11 +54,21 @@ else{
             'description'=>'required',
             'image'=>['required','image'],
             'categorie'=>'required',
-            'prix'=>'required'
+            'prix'=>'required',
+            'date_dispo'=>'required',
+            'date_fin_dispo'=>'required',
+            'premium'=>''
           ]);
+         if(!isset($data['premium'])){
+$data['premium']=false;
+         }else{
+            $data['premium']=true;
+         }
+
           $imagepath=request('image')->store('items','public');
           $image=Image::make("storage/{$imagepath}")->fit(1200,1200);
           $image->save();
+
           $datae=auth()->user()->item()->create([
               'titre'=>$data['titre'],
                'description'=>$data['description'],
@@ -71,7 +81,10 @@ else{
                    'item_id'=>$datae['id'],
                    'user_id'=>auth()->user()->id,
                    'categorie_id'=>$data['categorie'],
-                'prix'=>$data['prix']
+                'prix'=>$data['prix'],
+                'date_dispo'=>$data['date_dispo'],
+                'date_fin_dispo'=>$data['date_fin_dispo'],
+                'premium'=>$data['premium']
                  ]);
                 return redirect('/profile/'.auth()->user()->id);
     }
@@ -121,13 +134,20 @@ else{
         //
     }
     public function restore(){
-        $data=request(['item_id','prix','categorie']);
-
+        $data=request(['item_id','prix','categorie','date_dispo','date_fin_dispo','premium']);
+        if(!isset($data['premium'])){
+            $data['premium']=false;
+                     }else{
+                        $data['premium']=true;
+                     }
         Post::create([
             'item_id'=>$data['item_id'],
             'categorie_id'=>$data['categorie'],
             'user_id'=>auth()->user()->id,
-         'prix'=>$data['prix']
+         'prix'=>$data['prix'],
+         'date_dispo'=>$data['date_dispo'],
+         'date_fin_dispo'=>$data['date_fin_dispo'],
+         'premium'=>$data['premium']
           ]);
          return redirect('/profile/'.auth()->user()->id);
     }

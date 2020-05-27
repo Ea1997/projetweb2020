@@ -16,6 +16,7 @@
       @endforeach
 
     </ul>
+
     <form action="/search" method="post" class="form-inline my-2 my-lg-0">
     {{ csrf_field() }}
       <input class="form-control mr-sm-2" type="search" placeholder="Search" name="Search">
@@ -23,9 +24,14 @@
     </form>
   </div>
 </nav>
+@if(isset($message))
+    <div class="alert alert-danger" role="alert">
+  {{$message}}
+</div>
+@endif
 <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Louer {{$post->item->titre}}</div>
+                <div class="card-header">Durée de location de  {{$post->item->titre}} souhaitée Disponible de {{$post->date_dispo}} jusqu'a {{$post->date_fin_dispo}}</div>
 
                 <div class="card-body">
 
@@ -36,12 +42,25 @@
 <input type="hidden" name="post_id" value="{{$post->id}}">
 
                         <div class="form-group row">
-                            <label for="duree" class="col-md-4 col-form-label text-md-right">{{ __('Durée des jours') }}</label>
+                            <label for="date_debut_location" class="col-md-4 col-form-label text-md-right">{{ __('De :') }}</label>
 
                             <div class="col-md-6">
-                                <input id="duree" type="number" class="form-control @error('duree') is-invalid @enderror" name="duree" value="{{ old('duree')}}" required autocomplete="duree">
+                                <input id="date_debut_location" type="date" class="form-control @error('date_debut_location') is-invalid @enderror" name="date_debut_location" value="{{ old('date_debut_location')}}" required autocomplete="date_debut_location">
 
-                                @error('duree')
+                                @error('date_debut_location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date_fin_location" class="col-md-4 col-form-label text-md-right">{{ __("Jusqu'à") }}</label>
+
+                            <div class="col-md-6">
+                                <input id="date_fin_location" type="date" class="form-control @error('date_fin_location') is-invalid @enderror" name="date_fin_location" value="{{ old('date_fin_location')}}" required autocomplete="date_fin_location">
+
+                                @error('date_fin_location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -4,15 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categorie extends Model
+class rating extends Model
 {
-
-
-
     public function item()
-      {
-      	return $this->hasMany(Item::class);
-      }
-
+    {
+    	return $this->belongsTo(Item::class);
+    }
 
 }

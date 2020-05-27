@@ -19,6 +19,9 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('prix');
             $table->string('categorie_id');
+            $table->date('date_dispo');
+            $table->date('date_fin_dispo');
+            $table->boolean('premium');
             $table->timestamps();
             $table->index('item_id');
             $table->index('user_id');

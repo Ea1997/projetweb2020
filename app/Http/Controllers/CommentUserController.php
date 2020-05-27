@@ -8,18 +8,23 @@ use App\Post;
 use App\Item;
 use App\Categorie;
 use App\Order;
+use App\User;
+use App\CommentUser;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        //
+       $user=User::find($user_id);
+
+       return view ('comment.commentuserindex',compact('user'));
+
     }
 
     /**
@@ -38,31 +43,25 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $item_id,$order_id)
+    public function store(Request $request, $user_id,$order_id)
     {
 
         $data=request()->validate(  [
             'comment'=>'required',
-            'avis'=>'required',
-            'rating'=>'required'
+            'avis'=>'required'
 
           ]);
 
+          $user=User::find($user_id);
 
-
-        $comment=new Comment();
+        $comment=new CommentUser();
         $comment->user_id=auth()->user()->id;
-        $comment->item_id=$item_id;
+        $comment->profile_id=$user->profile->id;
         $comment->comment=$request->comment;
         $comment->avis=$request->avis;
         $comment->save();
-        $rating=new rating();
-        $rating->user_id=auth()->user()->id;
-        $rating->item_id=$item_id;
-        $rating->rate=$request->rating;
-        $rating->save();
         $order=Order::find($order_id);
-        $order->commented_by_user = true;
+        $order->commented_by_partenaire = true;
         $order->save();
         return redirect()->route('home');
         }
@@ -74,11 +73,12 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show($id,$order_id)
+    public function show($user_id,$orders_id)
     {
-        $post=Item::find($id);
+
+        $user=User::find($user_id);
         $data=Categorie::all();
-        return view ('comment.commentpost',compact('data','post','order_id'));
+        return view ('comment.commentuser',compact('data','user','orders_id'));
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentsTable extends Migration
+class CreateCommentUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('comment_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('profile_id');
             $table->text('comment');
             $table->boolean('avis');
             $table->timestamps();
         });
-        Schema::table('comments',function($table){
+        Schema::table('comment_users',function($table){
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 
@@ -34,8 +34,7 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['user_id','item_id']);
-
-        Schema::dropIfExists('comments');
+        Schema::dropForeign(['user_id','profile_id']);
+        Schema::dropIfExists('comment_users');
     }
 }

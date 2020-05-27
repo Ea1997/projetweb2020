@@ -23,9 +23,7 @@
     </form>
   </div>
 </nav>
-        <div class="col-md-12">
-        <a href="/order/historique"><button class="btn btn-primary mb-5">Historique</button></a>
-            <div class="card">
+
 
 
                 <div class="card-body">
@@ -36,7 +34,7 @@
 
     @if(isset($orders))
 
-    <h2>Vos commandes</h2>
+    <h2>Historique</h2>
 
     <table class="table table-striped">
         <thead>
@@ -48,19 +46,16 @@
                 <th>Prix totale</th>
                 <th>Status</th>
 
-                <th>numéro de telephone</th>
 
-                <th></th>
+
+                <th>date</th>
 
             </tr>
         </thead>
         <tbody>
             @foreach($orders as $order)
-            <?php  $datefin = \Carbon\Carbon::createFromFormat('Y-m-d', $order->date_fin_location)     ;  ?>
-            <?php  $dateplus = \Carbon\Carbon::createFromFormat('Y-m-d', $order->date_fin_location)     ;  ?>
-
-            @if($order->commented_by_user==0)
-
+            <?php  $datefin = \Carbon\Carbon::createFromFormat('Y-m-d', $order->date_fin_location)    ;  ?>
+            @if($order->commented_by_user==1)
             <tr>
                 <td>{{$order->id}}</td>
                 <td>{{$order->post->item->titre}}</td>
@@ -84,45 +79,28 @@
                 <td>{{$duree}} jours</td>
                 <td>{{$duree*$order->post->prix}} MAD</td>
 
-                @if($order->accepted==0 && $order->refused==0)
-<td><p style="color:#5cb85c"><strong>en traitement</strong></p></td>
-@elseif($order->refused==1)
+                @if($order->accepted==1)
+<td><p style="color:#5cb85c"><strong> a été acceptée</strong></p></td>
+@else($order->refused==1)
+
 <td>
-<p style="color:#F32013">Refusée par le propriétaire</p>
+<p style="color:#F32013">a été refusée par le propriétaire</p>
 
 
 
 
 </td>
-@else
-<td><p style="color:#0275d8">
-accepté par le propriétaire</p>
-</td>
-@endif
-@if($order->accepted==1)
-<td>{{$order->post->item->user->telephone}}</td>
-
-@else
-<td>non visible</td>
-@endif
-
-@if($order->accepted==1 && $dateplus > date('Y-m-d'))
-<td><a><button disabled class="btn btn-primary" >Laisser un commentaire</button></a></td>
-
-@elseif($order->accepted==1 && $dateplus <= date('Y-m-d'))
-@if($order->commented_by_user==0)
-<td><a href="/comments/{{$order->post->item->id}}/{{$order->id}}"><button  class="btn btn-primary" >Laisser un commentaire</button></a></td>
-@else
-<td></td>
-@endif
-@else
 
 @endif
 
 
 
 
-                </td>
+
+<td>de:{{$order->date_debut_location}}jusqu'à{{$order->date_fin_location}}</td>
+
+
+
 
             </tr>
             @endif
