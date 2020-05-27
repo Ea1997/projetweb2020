@@ -8,6 +8,7 @@
 
 
     <ul class="navbar-nav mr-auto">
+
     @foreach($data as $d)
       <li class="nav-item active">
         <a class="nav-link" href="/categorie/{{$d->id}}">{{$d->nom}} <span class="sr-only">(current)</span></a>

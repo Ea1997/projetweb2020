@@ -60,13 +60,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="/profile/{{Auth::user()->id}}" class="dropdown-item">Visiter ton profile</a>
-                                <a href="/order" class="dropdown-item">vos commandes</a>
-                                <a href="/order/commande" class="dropdown-item">Vos objets commandées</a>
+                                <a href="/profile/{{Auth::user()->id}}" class="dropdown-item">Votre profile</a>
+                                <a href="/order" class="dropdown-item">Vos commandes</a>
+                                <a href="/order/commande" class="dropdown-item">Vos objets commandés</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('se déconnecter') }}
+                                        {{ __('Se déconnecter') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

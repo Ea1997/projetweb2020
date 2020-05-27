@@ -69,11 +69,29 @@ if($request->date_debut_location >= $post->date_dispo && $request->date_fin_loca
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function show()
     {
         $data=Categorie::all();
 
         $orders= Order::where('user_id', '=', Auth()->user()->id)->get();
+
+
+
+
         if( count($orders) > 0)
             return view('orders.show',compact('data','orders'));
         else{
@@ -81,6 +99,24 @@ if($request->date_debut_location >= $post->date_dispo && $request->date_fin_loca
             return view ('orders.show',compact('data','message'));
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function reshow()
     {
         $data=Categorie::all();
@@ -155,6 +191,14 @@ if($request->date_debut_location >= $post->date_dispo && $request->date_fin_loca
             return view ('orders.historique',compact('data','message'));
         }
     }
+    public function historyv()
+    {
+         $data=Categorie::all();
+         $user=Auth()->user();
+
+            return view ('orders.historiquev',compact('data','user'));
+        }
+
 
     /**
      * Remove the specified resource from storage.

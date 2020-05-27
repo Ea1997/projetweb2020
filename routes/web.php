@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-
 Auth::routes();
 Route::get('/order/historique', 'OrderController@history');
+Route::get('/order/commande/historique', 'OrderController@historyv');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/order/commande', 'OrderController@reshow')->name('order.reshow');
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');

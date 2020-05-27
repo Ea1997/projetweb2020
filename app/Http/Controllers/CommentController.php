@@ -45,7 +45,6 @@ class CommentController extends Controller
             'comment'=>'required',
             'avis'=>'required',
             'rating'=>'required'
-
           ]);
 
 
@@ -61,9 +60,16 @@ class CommentController extends Controller
         $rating->item_id=$item_id;
         $rating->rate=$request->rating;
         $rating->save();
+
+
+
+
         $order=Order::find($order_id);
         $order->commented_by_user = true;
         $order->save();
+
+
+
         return redirect()->route('home');
         }
 

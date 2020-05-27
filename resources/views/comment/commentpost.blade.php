@@ -9,7 +9,8 @@
   @csrf
   <div class="card-body col-md-12">
   <div class="form-group row">
-  <div class="col-md-12"><label class=" text-md-left">Merci de laisser un commentaire sur l'objet {{$post->titre}} que vous avez louer de la part de {{$post->user->name}} </label></div>
+
+  <div class="col-md-12"><label class=" text-md-left">Merci de laisser votre commentaire !</label></div>
 
 <div class="col-md-12">
                 <textarea  id="comment" type="text" class="form-control @error('comment') is-invalid @enderror"  value="{{ old('comment')}}" name="comment"  autocomplete="comment" ></textarea>
